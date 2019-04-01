@@ -10,13 +10,13 @@ namespace XadrezConsole
             Console.Write("   ");
             for (int i = 0; i < tabuleiro.Linhas; i++)
             {
-                Console.Write($" {i} ");
+                Console.Write($"  {i}  ");
             }
             Console.WriteLine();
             Console.Write("   ");
             for (int i = 0; i < tabuleiro.Linhas; i++)
             {
-                Console.Write($"═╦═");
+                Console.Write($"══╦══");
             }
             Console.WriteLine();
 
@@ -28,12 +28,12 @@ namespace XadrezConsole
                 {
                     if (k == 0)
                     {
-                        Console.Write("   ╔═╗");
+                        Console.Write("   ╔═══╗");
 
                     }
                     else
                     {
-                        Console.Write("╔═╗");
+                        Console.Write("╔═══╗");
                     }
 
 
@@ -43,21 +43,27 @@ namespace XadrezConsole
                     if (j == 0)
                     {
                         Console.Write($"\n{i} ");
-                        if(tabuleiro.Peca(i,j) != null)
-                            Console.Write($"═╣{tabuleiro.Peca(i,j)}");
+                        if (tabuleiro.Peca(i, j) != null)
+                            Console.Write($"═╣ {tabuleiro.Peca(i, j)} ");
                         else
-                            Console.Write($"═╣ ");
+                            Console.Write($"═╣   ");
                     }
-                    if (j == tabuleiro.Colunas - 1)
+                    else if (j == tabuleiro.Colunas - 1)
                     {
-                        Console.Write(" ║");
+                        if (tabuleiro.Peca(i, j) != null)
+                            Console.Write($"╠╣ {tabuleiro.Peca(i, j)} ║");
+                        else
+                        {
+                            Console.Write("╠╣   ");
+                            Console.Write($"║");
+                        }
                     }
                     else
                     {
                         if(tabuleiro.Peca(i,j) != null)
-                            Console.Write($"{tabuleiro.Peca(i,j)}╠╣");
+                            Console.Write($"╠╣ {tabuleiro.Peca(i, j)} ");
                         else
-                            Console.Write(" ╠╣");
+                            Console.Write("╠╣   ");
                     }
                 }
                 Console.WriteLine();
@@ -65,12 +71,12 @@ namespace XadrezConsole
                 {
                     if (y == 0)
                     {
-                        Console.Write("   ╚═╝");
+                        Console.Write("   ╚═══╝");
 
                     }
                     else
                     {
-                        Console.Write("╚═╝");
+                        Console.Write("╚═══╝");
                     }
 
                     
