@@ -128,9 +128,9 @@ namespace XadrezConsole
 
         public static void FormatarTela()
         {
-            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.BackgroundColor = ConsoleColor.DarkCyan;
             Console.Title = "Xadrez";
-            Console.CursorSize = 25;
             Console.Clear();
         }
     }

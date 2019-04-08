@@ -15,6 +15,9 @@
             qtdeMovimentos = 0;
         }
 
-
+        public void IncrementarMovimento()
+        {
+            qtdeMovimentos++;
+        }
     }
 }
