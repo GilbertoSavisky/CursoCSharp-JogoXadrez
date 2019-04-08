@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using tabuleiro;
 
 namespace XadrezConsole
@@ -7,10 +8,11 @@ namespace XadrezConsole
     {
         public static void ImprimirTabuleiro(Tabuleiro tabuleiro)
         {
+            int zColuna = tabuleiro.Colunas;
             Console.Write("   ");
             for (int i = 0; i < tabuleiro.Linhas; i++)
             {
-                Console.Write($"  {i}  ");
+                Console.Write($"  {(char)(i+65)}  ");
             }
             Console.WriteLine();
             Console.Write("   ");
@@ -42,7 +44,7 @@ namespace XadrezConsole
                 {
                     if (j == 0)
                     {
-                        Console.Write($"\n{i} ");
+                        Console.Write($"\n{zColuna--} ");
                         if (tabuleiro.Peca(i, j) != null)
                             Console.Write($"═╣ {tabuleiro.Peca(i, j)} ");
                         else
