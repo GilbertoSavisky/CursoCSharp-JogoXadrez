@@ -12,13 +12,13 @@ namespace XadrezConsole
             Console.Write("   ");
             for (int i = 0; i < tabuleiro.Linhas; i++)
             {
-                Console.Write($"  {(char)(i+65)}  ");
+                Console.Write($"  {(char)(i + 65)}  ");
             }
             Console.WriteLine();
             Console.Write("   ");
             for (int i = 0; i < tabuleiro.Linhas; i++)
             {
-                Console.Write($"══╦══");
+                Console.Write($"  ╦  ");
             }
             Console.WriteLine();
 
@@ -29,15 +29,9 @@ namespace XadrezConsole
                 for (int k = 0; k < tabuleiro.Colunas; k++)
                 {
                     if (k == 0)
-                    {
-                        Console.Write("   ╔═══╗");
-
-                    }
+                        Console.Write("   ╔═╩═╗");
                     else
-                    {
-                        Console.Write("╔═══╗");
-                    }
-
+                        Console.Write("╔═╩═╗");
 
                 }
                 for (int j = 0; j < tabuleiro.Colunas; j++)
@@ -46,14 +40,22 @@ namespace XadrezConsole
                     {
                         Console.Write($"\n{zColuna--} ");
                         if (tabuleiro.Peca(i, j) != null)
-                            Console.Write($"═╣ {tabuleiro.Peca(i, j)} ");
+                        {
+                            Console.Write($"═╣ ");
+                            Tela.ImprimirPeca(tabuleiro.Peca(i, j));
+                            Console.Write(" ");
+                        }
                         else
                             Console.Write($"═╣   ");
                     }
                     else if (j == tabuleiro.Colunas - 1)
                     {
                         if (tabuleiro.Peca(i, j) != null)
-                            Console.Write($"╠╣ {tabuleiro.Peca(i, j)} ║");
+                        {
+                            Console.Write($"╠╣ ");
+                            Tela.ImprimirPeca(tabuleiro.Peca(i, j));
+                            Console.Write(" ║");
+                        }
                         else
                         {
                             Console.Write("╠╣   ");
@@ -62,8 +64,12 @@ namespace XadrezConsole
                     }
                     else
                     {
-                        if(tabuleiro.Peca(i,j) != null)
-                            Console.Write($"╠╣ {tabuleiro.Peca(i, j)} ");
+                        if (tabuleiro.Peca(i, j) != null)
+                        {
+                            Console.Write($"╠╣ ");
+                            Tela.ImprimirPeca(tabuleiro.Peca(i, j));
+                            Console.Write(" ");
+                        }
                         else
                             Console.Write("╠╣   ");
                     }
@@ -73,18 +79,59 @@ namespace XadrezConsole
                 {
                     if (y == 0)
                     {
-                        Console.Write("   ╚═══╝");
+                        Console.Write("   ╚═╦═╝");
 
                     }
                     else
                     {
-                        Console.Write("╚═══╝");
+                        Console.Write("╚═╦═╝");
                     }
 
-                    
+
                 }
                 Console.WriteLine();
             }
+            Console.Write("   ");
+
+            for (int h = 0; h < tabuleiro.Linhas; h++)
+            {
+                Console.Write($"  ╩  ");
+            }
+            Console.WriteLine();
+            Console.Write("   ");
+
+            for (int h = 0; h < tabuleiro.Linhas; h++)
+            {
+                Console.Write($"  {(char)(h + 65)}  ");
+            }
+            Console.WriteLine();
+        }
+
+        public static void ImprimirPeca(Peca peca)
+        {
+
+            if (peca.Cor == Cor.Branca)
+            {
+                ConsoleColor aux = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write(peca);
+                Console.ForegroundColor = aux;
+            }
+            else if (peca.Cor == Cor.Preta)
+            {
+                ConsoleColor aux = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.Write(peca);
+                Console.ForegroundColor = aux;
+            }
+        }
+
+        public static void FormatarTela()
+        {
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.Title = "Xadrez";
+            Console.CursorSize = 25;
+            Console.Clear();
         }
     }
 }
