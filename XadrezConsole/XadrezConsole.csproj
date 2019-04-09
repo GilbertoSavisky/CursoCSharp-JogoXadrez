@@ -45,13 +45,16 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="xadrez\Bispo.cs" />
+    <Compile Include="xadrez\Cavalo.cs" />
     <Compile Include="tabuleiro\Enums\Cor.cs" />
     <Compile Include="tabuleiro\Exception\TabuleiroException.cs" />
+    <Compile Include="xadrez\Peao.cs" />
     <Compile Include="tabuleiro\Peca.cs" />
     <Compile Include="tabuleiro\Posicao.cs" />
     <Compile Include="tabuleiro\Tabuleiro.cs" />
     <Compile Include="Tela.cs" />
-    <Compile Include="xadrez\Dama.cs" />
+    <Compile Include="xadrez\Rainha.cs" />
     <Compile Include="xadrez\PartidaDeXadrez.cs" />
     <Compile Include="xadrez\PosicaoXadrez.cs" />
     <Compile Include="xadrez\Rei.cs" />
