@@ -1,7 +1,6 @@
 ﻿using System;
-using System.IO;
-using xadrez;
 using tabuleiro;
+using xadrez;
 
 namespace XadrezConsole
 {
@@ -15,12 +14,22 @@ namespace XadrezConsole
                 Tela.FormatarTela();
                 PartidaDeXadrez partida = new PartidaDeXadrez();
 
+                while (!partida.Terminada)
+                {
+                    Console.Clear();
+                    Tela.ImprimirTabuleiro(partida.tabuleiro);
 
-                Tela.ImprimirTabuleiro(partida.tabuleiro);
+                    Console.WriteLine();
+                    Console.Write("Origem: ");
+                    Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
+                    Console.Write("Destino: ");
+                    Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
 
-                System.Console.WriteLine("\n\n");
+                    partida.ExecutaMovimento(origem, destino);
+                }
             }
-            catch(TabuleiroException erro)
+
+            catch (TabuleiroException erro)
             {
                 Console.WriteLine(erro.Message);
             }
