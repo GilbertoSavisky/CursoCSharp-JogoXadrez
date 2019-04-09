@@ -15,7 +15,7 @@ namespace XadrezConsole
                 ImprimirMatrizCima(tabuleiro);
                 for (int j = 0; j < tabuleiro.Colunas; j++)
                 {
-                    ImprimirMatriz(tabuleiro, numeroColuna, i, j);
+                    ImprimirPeca(tabuleiro.Peca(i,j), tabuleiro, numeroColuna, i, j);
                 }
                 numeroColuna--;
                 Console.WriteLine();
@@ -27,6 +27,9 @@ namespace XadrezConsole
 
         public static void ImprimirTabuleiro(Tabuleiro tabuleiro, bool[,] posPossiveis)
         {
+            ConsoleColor corOriginal = Console.BackgroundColor;
+            ConsoleColor corAlterada = ConsoleColor.DarkGray;
+
             int numeroColuna = tabuleiro.Colunas;
             ImprimirParteCima(tabuleiro);
             for (int i = 0; i < tabuleiro.Linhas; i++)
@@ -34,36 +37,58 @@ namespace XadrezConsole
                 ImprimirMatrizCima(tabuleiro);
                 for (int j = 0; j < tabuleiro.Colunas; j++)
                 {
-                    //ImprimirPeca(tabuleiro.Peca, tabuleiro, i, j);
+                    if (posPossiveis[i, j])
+                        Console.BackgroundColor = corAlterada;
+                    else
+                        Console.BackgroundColor = corOriginal;
+                    ImprimirPeca(tabuleiro.Peca(i, j), tabuleiro, numeroColuna, i, j);
                 }
                 numeroColuna--;
                 Console.WriteLine();
                 ImprimirParteBaixo(tabuleiro, i);
                 Console.WriteLine();
+                Console.BackgroundColor = corOriginal;
             }
         }
 
         public static void ImprimirPeca(Peca peca, Tabuleiro tabuleiro, int numCol, int i, int j)
         {
+            if (j == 0)
+                Console.Write($" {numCol} ╣");
             if (peca == null)
             {
-                ImprimirMatriz(tabuleiro, numCol, i, j);
-
-                if (peca.Cor == Cor.Branca)
-                {
-                    ConsoleColor aux = Console.ForegroundColor;
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write(peca);
-                    Console.ForegroundColor = aux;
-                }
-                else if (peca.Cor == Cor.Preta)
-                {
-                    ConsoleColor aux = Console.ForegroundColor;
-                    Console.ForegroundColor = ConsoleColor.Black;
-                    Console.Write(peca);
-                    Console.ForegroundColor = aux;
-                }
+                if (j == tabuleiro.Colunas - 1)
+                    Console.Write($"   ╠═  { numCol}");
+                else
+                    Console.Write("   ╠╣");
             }
+
+            else if (peca.Cor == Cor.Branca)
+            {
+                ConsoleColor aux = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write($" {peca} ");
+                Console.ForegroundColor = aux;
+                if (j == tabuleiro.Colunas - 1)
+                    Console.Write($"╠═  { numCol}");
+                else
+                    Console.Write("╠╣");
+            }
+            else if (peca.Cor == Cor.Preta)
+            {
+                ConsoleColor aux = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.Write($" {peca} ");
+                Console.ForegroundColor = aux;
+                if (j == tabuleiro.Colunas - 1)
+                    Console.Write($"╠═  { numCol}");
+                else
+                    Console.Write("╠╣");
+            }
+
+           
+
+
         }
 
         public static void FormatarTela()
@@ -74,7 +99,7 @@ namespace XadrezConsole
             Console.Clear();
         }
 
-        public static PosicaoXadrez lerPosicaoXadrez()
+        public static PosicaoXadrez LerPosicaoXadrez()
         {
             string s = Console.ReadLine();
             char coluna = s[0];
@@ -106,50 +131,16 @@ namespace XadrezConsole
                     Console.Write("   ╔═╩═╗");
                 else
                     Console.Write("╔═╩═╗");
-
             }
+            Console.WriteLine();
         }
 
         public static void ImprimirMatriz(Tabuleiro tabuleiro, int numeroColuna, int i, int j)
         {
-            if (j == 0)
-            {
-
-                Console.Write($"\n{numeroColuna} ");
-                if (tabuleiro.Peca(i, j) != null)
-                {
-                    Console.Write($"═╣ ");
-                    //Tela.ImprimirPeca(tabuleiro.Peca(i, j));
-                    Console.Write(" ");
-                }
-                else
-                    Console.Write($"═╣   ");
-            }
-            else if (j == tabuleiro.Colunas - 1)
-            {
-                if (tabuleiro.Peca(i, j) != null)
-                {
-                    Console.Write($"╠╣ ");
-                    //Tela.ImprimirPeca(tabuleiro.Peca(i, j));
-                    Console.Write(" ╠═");
-                }
-                else
-                {
-                    Console.Write("╠╣   ");
-                    Console.Write($"╠═  { numeroColuna}");
-                }
-            }
+            if (j == tabuleiro.Colunas - 1)
+                Console.Write($"   ╠═  { numeroColuna}");
             else
-            {
-                if (tabuleiro.Peca(i, j) != null)
-                {
-                    Console.Write($"╠╣ ");
-                    //Tela.ImprimirPeca(tabuleiro.Peca(i, j));
-                    Console.Write(" ");
-                }
-                else
-                    Console.Write("╠╣   ");
-            }
+                Console.Write("   ╠╣");
             
         }
         public static void ImprimirParteBaixo(Tabuleiro tabuleiro, int fim)
