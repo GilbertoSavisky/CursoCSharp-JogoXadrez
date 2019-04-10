@@ -13,13 +13,17 @@ namespace XadrezConsole
             {
                 Tela.FormatarTela();
                 PartidaDeXadrez partida = new PartidaDeXadrez();
+               
+
 
                 while (!partida.Terminada)
                 {
                     Console.Clear();
                     Tela.ImprimirTabuleiro(partida.tabuleiro);
 
-                    //Console.WriteLine();
+                    Console.WriteLine($"\nTurno: {partida.Turno}");
+                    Console.WriteLine($"Aguardando jogada: {partida.jogadorAtual}");
+
                     Console.Write("Origem: ");
                     Posicao origem = Tela.LerPosicaoXadrez().toPosicao();
 
@@ -28,10 +32,12 @@ namespace XadrezConsole
 
                     Console.Clear();
                     Tela.ImprimirTabuleiro(partida.tabuleiro, posicoesPossiveis);
+                    Console.WriteLine($"\nTurno: {partida.Turno}");
+                    Console.WriteLine($"Aguardando jogada: {partida.jogadorAtual}");
                     Console.Write("Destino: ");
                     Posicao destino = Tela.LerPosicaoXadrez().toPosicao();
 
-                    partida.ExecutaMovimento(origem, destino);
+                    partida.RealizaJogada(origem, destino);
                 }
             }
 
