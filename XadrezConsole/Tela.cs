@@ -53,7 +53,7 @@ namespace XadrezConsole
             ConsoleColor corAlterada = ConsoleColor.Magenta;
 
             if (j == 0)
-                Console.Write($" {numCol} ╣");
+                Console.Write($" {numCol}  ═╣");
             Console.BackgroundColor = corAlterada;
             if (peca == null)
             {
@@ -137,7 +137,9 @@ namespace XadrezConsole
 
         public static PosicaoXadrez LerPosicaoXadrez()
         {
-            string s = Console.ReadLine();
+            string s = null;
+            while(s == null || s == "")
+                s = Console.ReadLine();
             char coluna = s[0];
             int linha = int.Parse(s[1] + "");
             return new PosicaoXadrez(coluna, linha);
