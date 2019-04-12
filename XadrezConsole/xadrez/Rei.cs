@@ -4,11 +4,11 @@ namespace xadrez
 {
     class Rei : Peca
     {
-        private PartidaDeXadrez Partida;
+        private PartidaDeXadrez _partida;
 
         public Rei(Tabuleiro tab, Cor cor, PartidaDeXadrez partida) : base (tab, cor)
         {
-            Partida = partida;
+            _partida = partida;
         }
 
         public override string ToString()
@@ -83,7 +83,7 @@ namespace xadrez
 
             // #jogadaespecial roque
 
-            if(qtdeMovimentos == 0 && !Partida.xeque)
+            if(qtdeMovimentos == 0 && !_partida.xeque)
             {
                 // #jogadaespecial roque pequeno
                 Posicao posT1 = new Posicao(posicao.Linha, posicao.Coluna + 3);
@@ -98,6 +98,24 @@ namespace xadrez
                 }
 
             }
+            if (qtdeMovimentos == 0 && !_partida.xeque)
+            {
+                // #jogadaespecial roque grande
+                Posicao posT2 = new Posicao(posicao.Linha, posicao.Coluna - 4);
+                if (TesteTorreParaRoque(posT2))
+                {
+                    Posicao p1 = new Posicao(posicao.Linha, posicao.Coluna - 1);
+                    Posicao p2 = new Posicao(posicao.Linha, posicao.Coluna - 2);
+                    Posicao p3 = new Posicao(posicao.Linha, posicao.Coluna - 3);
+
+                    if (Tab.Peca(p1) == null && Tab.Peca(p2) == null && Tab.Peca(p3) == null)
+                    {
+                        mat[posicao.Linha, posicao.Coluna - 2] = true;
+                    }
+                }
+
+            }
+
             return mat;
 
         }
